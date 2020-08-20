@@ -6,10 +6,11 @@ import "./styles.css";
 export default function Header() {
 	return (
 		<header>
-			<div id="headerIcon">
-				<BsEye style={{ height: 40, width: 40 }} />
+			<div class="flex-1">
+				<BsEye id="headerIcon" style={{ height: 40, width: 40 }} />
 			</div>
-			<p>Nike Sneaker Watcher</p>
+			<p class="flex-1">Nike Sneaker Watcher</p>
+			<div class="flex-1"></div>
 		</header>
 	);
 }

@@ -43,10 +43,12 @@ export default function Homepage({ keywordStore }) {
 	}, [keywordStore.keywords]);
 
 	return (
-		<div className="container">
-			<p id="mainTitle">Set the querys:</p>
+		<div className="container flex-column flex-1">
+			<p className="flex-1" id="mainTitle">
+				Set the querys:
+			</p>
 
-			<div className="form">
+			<div className="flex-1">
 				<Formik
 					validationSchema={schema}
 					onSubmit={handleSubmit}
@@ -70,7 +72,6 @@ export default function Homepage({ keywordStore }) {
 									errors.nameKeyword && touched.nameKeyword
 								}
 								helperText={errors.nameKeyword}
-								autoFocus={true}
 								name="nameKeyword"
 								type="name"
 								label="Sneaker Name"

@@ -43,8 +43,35 @@ function Products({ keywordStore }) {
 
 	return (
 		<div class="productsInfo">
-			<p> Number Of Results: {numberOfResults || 0}</p>
-			<p>{keywordStore.keywords.sizeKeyword}</p>
+			<p> Results: ({numberOfResults || 0})</p>
+			<div class="grid-row">
+				<div class="grid-column">
+					<p>1</p>
+				</div>
+				<div class="grid-column">
+					<p>2</p>
+				</div>
+				<div class="grid-column">
+					<p>3</p>
+				</div>
+				<div class="grid-column">
+					<p>3</p>
+				</div>
+			</div>
+			<div class="grid-row">
+				<div class="grid-column">
+					<p>1</p>
+				</div>
+				<div class="grid-column">
+					<p>2</p>
+				</div>
+				<div class="grid-column">
+					<p>3</p>
+				</div>
+				<div class="grid-column">
+					<p>3</p>
+				</div>
+			</div>
 		</div>
 	);
 }
