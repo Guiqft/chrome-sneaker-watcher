@@ -9,7 +9,7 @@ const keywordStore = new KeywordStore();
 
 function App() {
 	return (
-		<div class="flex-column">
+		<div className="flex-column">
 			<Header />
 			<HomePage className="App-content" keywordStore={keywordStore} />
 		</div>

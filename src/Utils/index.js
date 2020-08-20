@@ -68,3 +68,34 @@ export const Sizes = [
 		label: "45,5",
 	},
 ];
+
+export const convertToSize = (code) => {
+	switch (code) {
+		case "3267":
+			return "37";
+		case "3275":
+			return "37,5";
+		case "3261":
+			return "38";
+		case "3254":
+			return "39";
+		case "3259":
+			return "40";
+		case "3257":
+			return "41";
+		case "3300":
+			return "41,5";
+		case "3256":
+			return "42";
+		case "3258":
+			return "43";
+		case "3277":
+			return "43,5";
+		case "3255":
+			return "45";
+		case "3330":
+			return "45,5";
+		default:
+			return;
+	}
+};

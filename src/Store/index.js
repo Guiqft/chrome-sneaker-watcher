@@ -1,4 +1,5 @@
 import { observable, action, decorate } from "mobx";
+import "mobx-react-lite/batchingForReactDom";
 
 class KeywordStore {
 	keywords = {

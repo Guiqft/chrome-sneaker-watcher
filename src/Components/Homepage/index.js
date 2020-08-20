@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
 import { Button, LinearProgress, MenuItem } from "@material-ui/core";
@@ -6,7 +6,7 @@ import * as yup from "yup";
 
 import Products from "../Products";
 
-import { Sizes } from "../../Utils";
+import { Sizes, convertToSize } from "../../Utils";
 import { useStyles } from "../../Styles";
 
 import "./styles.css";
@@ -18,7 +18,6 @@ const schema = yup.object({
 
 export default function Homepage({ keywordStore }) {
 	const [initialized, setInitialized] = React.useState(false);
-	const [test, setTest] = useState();
 	const classes = useStyles();
 
 	const handleSubmit = async (values, { setSubmitting }) => {
@@ -28,19 +27,18 @@ export default function Homepage({ keywordStore }) {
 		await keywordStore.setKeywords(values.nameKeyword, values.sizeKeyword);
 	};
 
-	//----   eslint-disable-next-line
-	// useEffect(() => {
-	// 	if (!initialized) {
-	// 		keywordStore.setKeywords(localStorage.getItem("keywords") || "");
-	// 		setInitialized(true);
-	// 	}
-	// });
-
+	// eslint-disable-next-line
 	useEffect(() => {
-		console.log(keywordStore.keywords);
-		// keywordStore.keywords.nameKeyword &&
-		// 	setTest(keywordStore.keywords.nameKeyword);
-	}, [keywordStore.keywords]);
+		if (!initialized) {
+			const obj = JSON.parse(localStorage.getItem("keywords"));
+
+			keywordStore.setKeywords(
+				obj.nameKeyword || "",
+				obj.sizeKeyword || ""
+			);
+			setInitialized(true);
+		}
+	});
 
 	return (
 		<div className="container flex-column flex-1">
@@ -53,8 +51,8 @@ export default function Homepage({ keywordStore }) {
 					validationSchema={schema}
 					onSubmit={handleSubmit}
 					initialValues={{
-						nameKeyword: "",
-						sizeKeyword: "",
+						nameKeyword: keywordStore.keywords.nameKeyword || "",
+						sizeKeyword: keywordStore.keywords.sizeKeyword || "",
 					}}
 				>
 					{({
@@ -74,7 +72,10 @@ export default function Homepage({ keywordStore }) {
 								helperText={errors.nameKeyword}
 								name="nameKeyword"
 								type="name"
-								label="Sneaker Name"
+								label={
+									keywordStore.keywords.nameKeyword ||
+									"Sneaker Name"
+								}
 								size="small"
 								variant="outlined"
 								color="secondary"
@@ -90,7 +91,11 @@ export default function Homepage({ keywordStore }) {
 								name="sizeKeyword"
 								select
 								type="name"
-								label="Sneaker Size"
+								label={
+									convertToSize(
+										keywordStore.keywords.sizeKeyword
+									) || "Sneaker Size"
+								}
 								onChange={handleChange}
 								variant="outlined"
 								size="small"

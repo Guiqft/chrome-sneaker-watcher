@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { searchSneaker } from "../../Utils";
+import Grid from "../Grid";
 
 import "./styles.css";
 
 function Products({ keywordStore }) {
 	const [apiData, setApiData] = useState({});
 	const [numberOfResults, setNumberOfResults] = useState(0);
+	const [sneakersData, setSneakersData] = useState([]);
 
 	const getApiData = async (name, size) => {
 		console.log(
@@ -36,42 +38,17 @@ function Products({ keywordStore }) {
 	useEffect(() => {
 		try {
 			setNumberOfResults(apiData.searchInfo.number_of_results);
+			setSneakersData(apiData.productsInfo.products);
 		} catch (err) {
 			console.log(err);
 		}
 	}, [apiData]);
 
 	return (
-		<div class="productsInfo">
+		<div className="productsInfo">
 			<p> Results: ({numberOfResults || 0})</p>
-			<div class="grid-row">
-				<div class="grid-column">
-					<p>1</p>
-				</div>
-				<div class="grid-column">
-					<p>2</p>
-				</div>
-				<div class="grid-column">
-					<p>3</p>
-				</div>
-				<div class="grid-column">
-					<p>3</p>
-				</div>
-			</div>
-			<div class="grid-row">
-				<div class="grid-column">
-					<p>1</p>
-				</div>
-				<div class="grid-column">
-					<p>2</p>
-				</div>
-				<div class="grid-column">
-					<p>3</p>
-				</div>
-				<div class="grid-column">
-					<p>3</p>
-				</div>
-			</div>
+
+			<Grid data={sneakersData} />
 		</div>
 	);
 }
