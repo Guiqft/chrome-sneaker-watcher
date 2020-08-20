@@ -7,4 +7,10 @@ export const useStyles = makeStyles({
 		paddingTop: 0,
 		minWidth: 200,
 	},
+	itemButton: {
+		padding: 3,
+		margin: 0,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });

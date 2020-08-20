@@ -5,7 +5,7 @@ const API_URL = "https://busca.nike.com.br/";
 
 export const searchSneaker = (name, size) =>
 	axios.get(
-		`${PROXY_URL}${API_URL}busca?q=${name}&origin=autocomplete&common_filter%5B372%5D=${size}&ajaxSearch=1`,
+		`${PROXY_URL}${API_URL}busca?q=${name}&origin=autocomplete&common_filter%5B372%5D=${size}&ajaxSearch=1&sort=5`,
 		{
 			headers: {
 				"Access-Control-Allow-Origin": "*",

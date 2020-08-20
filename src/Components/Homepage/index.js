@@ -76,6 +76,7 @@ export default function Homepage({ keywordStore }) {
 									keywordStore.keywords.nameKeyword ||
 									"Sneaker Name"
 								}
+								placeholder="Sneaker Name"
 								size="small"
 								variant="outlined"
 								color="secondary"
@@ -96,6 +97,7 @@ export default function Homepage({ keywordStore }) {
 										keywordStore.keywords.sizeKeyword
 									) || "Sneaker Size"
 								}
+								placeholder="Sneaker Size"
 								onChange={handleChange}
 								variant="outlined"
 								size="small"

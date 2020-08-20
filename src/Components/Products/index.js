@@ -46,9 +46,11 @@ function Products({ keywordStore }) {
 
 	return (
 		<div className="productsInfo">
-			<p> Results: ({numberOfResults || 0})</p>
+			<p> Results ({numberOfResults || 0}):</p>
 
-			<Grid data={sneakersData} />
+			<div class="scroll">
+				<Grid data={sneakersData} />
+			</div>
 		</div>
 	);
 }

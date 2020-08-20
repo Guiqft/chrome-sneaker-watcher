@@ -6,8 +6,49 @@
 }
 
 .card {
-	border: 2px solid #e7e7e7;
-	background-color: burlywood;
-	border-radius: 4px;
-	padding: 0.5rem;
+	display: flex;
+	border: 0.1rem solid white;
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	flex-direction: column;
+	-webkit-box-shadow: 0px 10px 26px -5px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 10px 26px -5px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 10px 26px -5px rgba(0, 0, 0, 0.75);
+}
+
+.cardImage {
+	flex: 1;
+	max-width: 100%;
+}
+
+.cardInfo {
+	flex: 1;
+	padding: 1rem;
+	border-radius: 10px;
+	background-color: #045757;
+}
+
+.cardInfoTitle {
+	font-size: 100%;
+	font-weight: 700;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.cardInfoDescription {
+	font-size: 85%;
+}
+
+.cardInfoBottomRow {
+	display: flex;
+	flex-direction: row;
+}
+
+.cardInfoPrice {
+	flex: 3;
+	font-weight: 700;
+	font-size: 85%;
+	padding-top: 8%;
 }
