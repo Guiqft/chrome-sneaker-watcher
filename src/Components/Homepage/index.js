@@ -8,6 +8,8 @@ import Products from "../Products";
 
 import { Sizes } from "../../Utils";
 
+import "./styles.css";
+
 const schema = yup.object({
 	nameKeyword: yup.string().required("You need to put a name."),
 	sizeKeyword: yup.string().required("Please, choose a size."),
