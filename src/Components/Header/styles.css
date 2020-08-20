@@ -8,10 +8,11 @@ header {
 
 header div {
 	justify-self: start;
-	padding-left: 3vh;
+	padding-left: 8vh;
 }
 
 header p {
+	margin-left: -8vh;
 	font-weight: 700;
 	text-transform: uppercase;
 	flex: 1;

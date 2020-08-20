@@ -1,8 +1,23 @@
 .container {
-	margin-top: 200;
-	background-color: "#242734" !important;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 #mainTitle {
-	font-size: 200;
+	color: #2c3040;
+	margin-bottom: 20px;
+	margin-top: 25px;
+	margin-left: 30px;
+	font-size: 16px;
+}
+
+.form {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 35px;
+}
+
+.MuiTextField-root {
+	margin-left: 10vh;
 }

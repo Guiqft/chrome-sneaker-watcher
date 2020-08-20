@@ -7,6 +7,7 @@ import * as yup from "yup";
 import Products from "../Products";
 
 import { Sizes } from "../../Utils";
+import { useStyles } from "../../Styles";
 
 import "./styles.css";
 
@@ -18,6 +19,7 @@ const schema = yup.object({
 export default function Homepage({ keywordStore }) {
 	const [initialized, setInitialized] = React.useState(false);
 	const [test, setTest] = useState();
+	const classes = useStyles();
 
 	const handleSubmit = async (values, { setSubmitting }) => {
 		setSubmitting(false);
@@ -42,68 +44,80 @@ export default function Homepage({ keywordStore }) {
 
 	return (
 		<div className="container">
-			<h1 id="mainTitle">Sneaker Watcher</h1>
+			<p id="mainTitle">Set the querys:</p>
 
-			<Formik
-				validationSchema={schema}
-				onSubmit={handleSubmit}
-				initialValues={{
-					nameKeyword: "",
-					sizeKeyword: "",
-				}}
-			>
-				{({
-					submitForm,
-					isSubmitting,
-					errors,
-					touched,
-					handleChange,
-				}) => (
-					<Form>
-						<Field
-							component={TextField}
-							error={errors.nameKeyword && touched.nameKeyword}
-							helperText={errors.nameKeyword}
-							name="nameKeyword"
-							type="name"
-							label="Sneaker Name"
-							variant="outlined"
-						/>
+			<div className="form">
+				<Formik
+					validationSchema={schema}
+					onSubmit={handleSubmit}
+					initialValues={{
+						nameKeyword: "",
+						sizeKeyword: "",
+					}}
+				>
+					{({
+						submitForm,
+						isSubmitting,
+						errors,
+						touched,
+						handleChange,
+					}) => (
+						<Form>
+							<Field
+								className={classes.input}
+								component={TextField}
+								error={
+									errors.nameKeyword && touched.nameKeyword
+								}
+								helperText={errors.nameKeyword}
+								autoFocus={true}
+								name="nameKeyword"
+								type="name"
+								label="Sneaker Name"
+								size="small"
+								variant="outlined"
+								color="secondary"
+							/>
 
-						<Field
-							component={TextField}
-							error={errors.sizeKeyword && touched.sizeKeyword}
-							helperText={errors.sizeKeyword}
-							name="sizeKeyword"
-							select
-							type="name"
-							label="Sneaker Size"
-							onChange={handleChange}
-							variant="outlined"
-						>
-							{Sizes.map((option) => (
-								<MenuItem
-									key={option.value}
-									value={option.value}
-								>
-									{option.label}
-								</MenuItem>
-							))}
-						</Field>
+							<Field
+								className={classes.input}
+								component={TextField}
+								error={
+									errors.sizeKeyword && touched.sizeKeyword
+								}
+								helperText={errors.sizeKeyword}
+								name="sizeKeyword"
+								select
+								type="name"
+								label="Sneaker Size"
+								onChange={handleChange}
+								variant="outlined"
+								size="small"
+							>
+								{Sizes.map((option) => (
+									<MenuItem
+										key={option.value}
+										value={option.value}
+									>
+										{option.label}
+									</MenuItem>
+								))}
+							</Field>
 
-						{isSubmitting && <LinearProgress />}
+							{isSubmitting && <LinearProgress />}
 
-						<Button
-							variant="contained"
-							color="primary"
-							disabled={isSubmitting}
-							onClick={submitForm}
-						>
-							Submit
-						</Button>
-					</Form>
-				)}
-			</Formik>
+							<Button
+								variant="contained"
+								color="primary"
+								disabled={isSubmitting}
+								onClick={submitForm}
+							>
+								Submit
+							</Button>
+						</Form>
+					)}
+				</Formik>
+			</div>
 
 			<Products keywordStore={keywordStore} />
 		</div>

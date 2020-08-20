@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { searchSneaker } from "../../Utils";
 
+import "./styles.css";
+
 function Products({ keywordStore }) {
 	const [apiData, setApiData] = useState({});
 	const [numberOfResults, setNumberOfResults] = useState(0);
@@ -40,7 +42,7 @@ function Products({ keywordStore }) {
 	}, [apiData]);
 
 	return (
-		<div>
+		<div class="productsInfo">
 			<p> Number Of Results: {numberOfResults || 0}</p>
 			<p>{keywordStore.keywords.sizeKeyword}</p>
 		</div>

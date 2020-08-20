@@ -8,6 +8,7 @@
 }
 
 body {
+	width: 600px;
 	font: 400 14px Roboto, sans-serif;
 	background: #f0f0f5;
 }
