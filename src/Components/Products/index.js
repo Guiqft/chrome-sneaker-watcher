@@ -48,7 +48,7 @@ function Products({ keywordStore }) {
 		<div className="productsInfo">
 			<p> Results ({numberOfResults || 0}):</p>
 
-			<div class="scroll">
+			<div className="scroll">
 				<Grid data={sneakersData} />
 			</div>
 		</div>

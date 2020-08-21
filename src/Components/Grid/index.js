@@ -9,13 +9,37 @@ import "./styles.css";
 export default function Grid({ data }) {
 	const classes = useStyles();
 
+	const requestRemoteImage = (imageUrl, productId) => {
+		const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", PROXY_URL + imageUrl);
+		xhr.responseType = "blob";
+
+		var objURL;
+
+		xhr.onload = function () {
+			var el = document.getElementById(productId);
+			objURL = URL.createObjectURL(xhr.response);
+
+			el.setAttribute("src", objURL);
+			//return objURL;
+		};
+
+		xhr.send(objURL);
+
+		console.log(objURL);
+		//return String(objURL);
+	};
+
 	return (
 		<div className="grid">
 			{data.map((item) => (
 				<div key={item.originalId} className="card">
 					<img
+						id={item.originalId}
 						alt={item.description}
-						src={item.imageUrl}
+						src={requestRemoteImage(item.imageUrl, item.originalId)}
 						className="cardImage"
 					/>
 
