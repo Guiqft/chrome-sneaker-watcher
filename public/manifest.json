@@ -9,7 +9,7 @@
 		"default_popup": "index.html",
 		"default_title": "Sneaker Watcher"
 	},
-	"permissions": ["webRequest", "*://*.nike.com.br/*"],
+	"permissions": ["webRequest", "tabs", "*://*.nike.com.br/*"],
 	"web_accessible_resources": ["*://*.nike.com.br/*"]
 
 	// "icons": {

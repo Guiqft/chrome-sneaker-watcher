@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -23,13 +23,9 @@ export default function Grid({ data }) {
 			objURL = URL.createObjectURL(xhr.response);
 
 			el.setAttribute("src", objURL);
-			//return objURL;
 		};
 
-		xhr.send(objURL);
-
-		console.log(objURL);
-		//return String(objURL);
+		xhr.send();
 	};
 
 	return (
@@ -62,7 +58,7 @@ export default function Grid({ data }) {
 								color="primary"
 								className={classes.itemButton}
 								target="_blank"
-								href={item.productUrl}
+								href={"https:" + item.productUrl}
 							>
 								<ChevronRightIcon />
 							</Button>
