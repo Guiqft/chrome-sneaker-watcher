@@ -13,4 +13,7 @@ export const useStyles = makeStyles({
 		alignItems: "center",
 		justifyContent: "center",
 	},
+	circularLoading: {
+		color: "white",
+	},
 });

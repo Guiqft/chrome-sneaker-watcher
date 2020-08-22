@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
+import { CircularProgress } from "@material-ui/core";
+
 import { searchSneaker } from "../../Utils";
 import Grid from "../Grid";
+
+import { useStyles } from "../../Styles";
 
 import "./styles.css";
 
 function Products({ keywordStore }) {
+	const classes = useStyles();
+
+	const [loading, setLoading] = useState(true);
 	const [apiData, setApiData] = useState({});
 	const [numberOfResults, setNumberOfResults] = useState(0);
 	const [sneakersData, setSneakersData] = useState([]);
@@ -39,10 +46,18 @@ function Products({ keywordStore }) {
 		try {
 			setNumberOfResults(apiData.searchInfo.number_of_results);
 			setSneakersData(apiData.productsInfo.products);
+			setLoading(false);
 		} catch (err) {
 			console.log(err);
 		}
 	}, [apiData]);
+
+	if (loading)
+		return (
+			<div className="productsInfo loading">
+				<CircularProgress className={classes.circularLoading} />
+			</div>
+		);
 
 	return (
 		<div className="productsInfo">

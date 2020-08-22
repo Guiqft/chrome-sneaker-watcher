@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -22,7 +22,7 @@ export default function Grid({ data }) {
 			var el = document.getElementById(productId);
 			objURL = URL.createObjectURL(xhr.response);
 
-			el.setAttribute("src", objURL);
+			if (el) el.setAttribute("src", objURL);
 		};
 
 		xhr.send();

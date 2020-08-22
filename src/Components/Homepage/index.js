@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
-import { Button, LinearProgress, MenuItem } from "@material-ui/core";
+import { Button, CircularProgress, MenuItem } from "@material-ui/core";
 import * as yup from "yup";
 
 import Products from "../Products";
@@ -18,13 +18,25 @@ const schema = yup.object({
 
 export default function Homepage({ keywordStore }) {
 	const [initialized, setInitialized] = React.useState(false);
+	const [loading, setLoading] = React.useState(false);
 	const classes = useStyles();
 
 	const handleSubmit = async (values, { setSubmitting }) => {
-		setSubmitting(false);
+		setSubmitting(true);
+		setLoading(true);
 
-		localStorage.setItem("keywords", JSON.stringify(values));
-		await keywordStore.setKeywords(values.nameKeyword, values.sizeKeyword);
+		try {
+			localStorage.setItem("keywords", JSON.stringify(values));
+			await keywordStore.setKeywords(
+				values.nameKeyword,
+				values.sizeKeyword
+			);
+
+			setSubmitting(false);
+			setLoading(false);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	// eslint-disable-next-line
@@ -39,6 +51,13 @@ export default function Homepage({ keywordStore }) {
 			setInitialized(true);
 		}
 	});
+
+	if (!initialized || loading)
+		return (
+			<div className="productsInfo loading">
+				<CircularProgress className={classes.circularLoading} />
+			</div>
+		);
 
 	return (
 		<div className="container flex-column flex-1">
@@ -112,7 +131,7 @@ export default function Homepage({ keywordStore }) {
 								))}
 							</Field>
 
-							{isSubmitting && <LinearProgress />}
+							{isSubmitting && <CircularProgress />}
 
 							<Button
 								variant="contained"

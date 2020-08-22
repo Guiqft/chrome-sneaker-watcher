@@ -18,4 +18,17 @@ KeywordStore = decorate(KeywordStore, {
 	setKeywords: action,
 });
 
-export { KeywordStore };
+class SneakersStore {
+	sneakersIds = [];
+
+	setSneakersIds(sneakers) {
+		this.sneakersIds.push(sneakers);
+	}
+}
+
+SneakersStore = decorate(SneakersStore, {
+	sneakersIds: observable,
+	setSneakersIds: action,
+});
+
+export { KeywordStore, SneakersStore };
