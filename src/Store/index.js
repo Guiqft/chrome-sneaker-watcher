@@ -20,15 +20,38 @@ KeywordStore = decorate(KeywordStore, {
 
 class SneakersStore {
 	sneakersIds = [];
+	newIds = [];
 
 	setSneakersIds(sneakers) {
-		this.sneakersIds.push(sneakers);
+		sneakers.forEach((item) => {
+			if (!this.sneakersIds.includes(item.originalId)) {
+				this.sneakersIds.push(item.originalId);
+				this.setNewId(item.originalId);
+			}
+		});
+	}
+
+	resetSneakersIds() {
+		this.sneakersIds = [];
+	}
+
+	setNewId(productId) {
+		this.newIds.push(productId);
+	}
+
+	resetNewIds() {
+		this.newIds = [];
 	}
 }
 
 SneakersStore = decorate(SneakersStore, {
 	sneakersIds: observable,
+	newIds: observable,
 	setSneakersIds: action,
+	resetSneakersIds: action,
+	setNewId: action,
+	resetNewIds: action,
 });
 
-export { KeywordStore, SneakersStore };
+export const sneakersStore = new SneakersStore();
+export const keywordStore = new KeywordStore();

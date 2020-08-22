@@ -3,7 +3,9 @@ import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
 import { Button, CircularProgress, MenuItem } from "@material-ui/core";
 import * as yup from "yup";
+import { observer } from "mobx-react";
 
+import { keywordStore } from "../../Store";
 import Products from "../Products";
 
 import { Sizes, convertToSize } from "../../Utils";
@@ -16,7 +18,7 @@ const schema = yup.object({
 	sizeKeyword: yup.string().required("Please, choose a size."),
 });
 
-export default function Homepage({ keywordStore }) {
+function Homepage() {
 	const [initialized, setInitialized] = React.useState(false);
 	const [loading, setLoading] = React.useState(false);
 	const classes = useStyles();
@@ -27,10 +29,7 @@ export default function Homepage({ keywordStore }) {
 
 		try {
 			localStorage.setItem("keywords", JSON.stringify(values));
-			await keywordStore.setKeywords(
-				values.nameKeyword,
-				values.sizeKeyword
-			);
+			keywordStore.setKeywords(values.nameKeyword, values.sizeKeyword);
 
 			setSubmitting(false);
 			setLoading(false);
@@ -41,13 +40,14 @@ export default function Homepage({ keywordStore }) {
 
 	// eslint-disable-next-line
 	useEffect(() => {
+		var obj;
 		if (!initialized) {
-			const obj = JSON.parse(localStorage.getItem("keywords"));
-
+			obj = JSON.parse(localStorage.getItem("keywords"));
 			keywordStore.setKeywords(
 				obj.nameKeyword || "",
 				obj.sizeKeyword || ""
 			);
+
 			setInitialized(true);
 		}
 	});
@@ -150,3 +150,5 @@ export default function Homepage({ keywordStore }) {
 		</div>
 	);
 }
+
+export default observer(Homepage);

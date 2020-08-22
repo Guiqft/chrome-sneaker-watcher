@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { CircularProgress } from "@material-ui/core";
 
+import { sneakersStore } from "../../Store";
 import { searchSneaker } from "../../Utils";
 import Grid from "../Grid";
 
@@ -11,17 +12,12 @@ import "./styles.css";
 
 function Products({ keywordStore }) {
 	const classes = useStyles();
-
 	const [loading, setLoading] = useState(true);
 	const [apiData, setApiData] = useState({});
 	const [numberOfResults, setNumberOfResults] = useState(0);
 	const [sneakersData, setSneakersData] = useState([]);
 
 	const getApiData = async (name, size) => {
-		console.log(
-			"Searching for name: '" + name + "' with sizeCode: '" + size + "'"
-		);
-
 		try {
 			const response = await searchSneaker(name, size);
 			setApiData(response.data);
@@ -46,6 +42,10 @@ function Products({ keywordStore }) {
 		try {
 			setNumberOfResults(apiData.searchInfo.number_of_results);
 			setSneakersData(apiData.productsInfo.products);
+
+			sneakersStore.resetSneakersIds();
+			sneakersStore.setSneakersIds(apiData.productsInfo.products);
+
 			setLoading(false);
 		} catch (err) {
 			console.log(err);
@@ -64,7 +64,7 @@ function Products({ keywordStore }) {
 			<p> Results ({numberOfResults || 0}):</p>
 
 			<div className="scroll">
-				<Grid data={sneakersData} />
+				<Grid data={sneakersData} nItems={numberOfResults} />
 			</div>
 		</div>
 	);
